@@ -1,0 +1,25 @@
+﻿@using MakanPergi.Models.Cuisine
+@using MakanPergi.Models.Modals
+@model EditCuisineDto
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Edit Cuisine"))
+<form name="editCuisineForm" role="form" class="form-horizontal" method="post" asp-route="cuisine.update" autocomplete="off" data-mode="edit">
+    <div class="modal-body">
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="update-cuisine-details">
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-2">
+                        <input asp-for="Id" name="Id" type="text" hidden/>
+                        <label class="col-md-3 col-form-label" asp-for="Name" required></label>
+                        <input id="cuisineName" type="text" asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml", new ModalFooterWithSaveAndCancelModel())
+</form>
+
+
+
+

@@ -1,0 +1,44 @@
+﻿@using MakanPergi.Models.Modals
+@using MakanPergi.Models.Shop
+@model CreateShopDto
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Create New Shop"))
+<form name="shopCreateForm" role="form" class="form-horizontal" method="post" asp-route="shop.create" autocomplete="off" data-mode="create">
+    <div class="modal-body">
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="create-shop-details">
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-2">
+                        <label class="col-md-3 col-form-label" asp-for="Name" required></label>
+                        <input id="shopName" type="text" asp-for="Name" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="col-md-3 col-form-label" asp-for="Name" hidden></label>
+                        <input id="shopImage" type="text" asp-for="Image" class="form-control" hidden/>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-5">
+                        <label class="col-md-3 col-form-label" required>Region</label>
+                        <select asp-for="RegionId" class="form-control">
+                            <option value="">Select Region</option>
+                            @foreach (var item in ViewBag.AllShop)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-5">
+                        <label class="col-md-3 col-form-label" asp-for="Address" required></label>
+                        <input id="shopAddress" type="text" asp-for="Address" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml", new ModalFooterWithSaveAndCancelModel())
+</form>
+
+

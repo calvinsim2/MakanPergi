@@ -1,0 +1,54 @@
+﻿@using MakanPergi.Models.Category
+@{
+}
+@model List<CategoryViewModel>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+}
+
+
+<div class="container-fluid mt-4">
+    <div class="container-fluid">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="col-sm-6">
+                <h3>Category</h3>
+            </div>
+            <div class="d-flex flex-row justify-content-end">
+                <button id="btnBulkUpload" class="btn btn-success m-1" float-sm-end>
+                    Bulk Upload
+                </button>
+                <button id="btnCreate" class="btn btn-primary m-1" type="button">
+                    Create
+                    <i class="fa fa-plus-square"></i>
+                </button>
+                </>
+            </div>
+        </div>
+
+        <table id="categoryTable" class="display mt-4 dt-custom-style">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="CategoryModalPlaceholder" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/view/category/index.js"></script>
+    <script src="~/js/view/category/createCategory.js"></script>
+    <script src="~/js/view/category/editCategory.js"></script>
+}

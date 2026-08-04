@@ -1,0 +1,7 @@
+﻿@using MakanPergi.Models.Modals
+@model ModalFooterWithSaveAndCancelModel
+
+<div class="modal-footer" justify-content-between>
+    <button type="button" class="btn btn-default close-button" data-bs-dismiss="modal">@(Model.CancelButtonText)</button>
+    <button type="submit" class="btn btn-@(Model.SaveButtonColor) save-button" id="btnSave" formmethod="post">@(Model.SaveButtonText)</button>
+</div>

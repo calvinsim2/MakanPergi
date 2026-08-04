@@ -1,0 +1,22 @@
+﻿@using MakanPergi.Models.Cuisine
+@using MakanPergi.Models.Modals
+@model CreateCuisineDto
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Create New Cuisine"))
+<form name="cuisineCreateForm" role="form" class="form-horizontal" method="post" asp-route="cuisine.create" autocomplete="off" data-mode="create">
+    <div class="modal-body">
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="create-cuisine-details">
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-2">
+                        <label class="col-md-3 col-form-label" asp-for="Name" required></label>
+                        <input id="cuisineName" type="text" asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml", new ModalFooterWithSaveAndCancelModel())
+</form>
+
+

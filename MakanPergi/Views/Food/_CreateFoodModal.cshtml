@@ -1,0 +1,54 @@
+﻿@using MakanPergi.Models.Food
+@using MakanPergi.Models.Modals
+@model CreateFoodDto
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Create New Food"))
+<form name="foodCreateForm" role="form" class="form-horizontal" method="post" asp-route="food.create" autocomplete="off" data-mode="create">
+    <div class="modal-body">
+        <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane container active" id="create-food-details">
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-5">
+                        <label class="col-md-3 col-form-label" asp-for="Name" required></label>
+                        <input id="foodName" type="text" asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 form-group row">
+                    <div class="col-md-5">
+                        @* <label class="col-md-3 col-form-label" required>Cuisine</label> *@
+                        <select asp-for="CuisineId" class="form-control">
+                            <option value="">Select Cuisine</option>
+                            @foreach (var item in ViewBag.AllCuisine)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <!-- Category -->
+                <div class="col-md-12 form-group row">
+                    <label class="col-lg-2 col-form-label label-required" asp-for="CategoryNames">Category</label>
+                    <div class="col-lg-4">
+                        <!-- where jsTree draws our nodes -->
+                        <div id="categorylocationTree"></div>
+                        <!-- where we store the user’s selections for posting back. -->
+                        <input id="hiddenCategoryLocationTree" asp-for="CategoryNames" type="hidden" />
+                        <span asp-validation-for="CategoryNames" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Shop -->
+                <div class="col-md-12 form-group row">
+                    <label class="col-lg-2 col-form-label label-required" asp-for="ShopNames">Shops</label>
+                    <div class="col-lg-4">
+                        <!-- where jsTree draws our nodes -->
+                        <div id="shoplocationTree"></div>
+                        <!-- where we store the user’s selections for posting back. -->
+                        <input id="hiddenShopLocationTree" asp-for="ShopNames" type="hidden" />
+                        <span asp-validation-for="ShopNames" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml", new ModalFooterWithSaveAndCancelModel())
+</form>

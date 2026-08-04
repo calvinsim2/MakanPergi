@@ -1,0 +1,70 @@
+{
+  "version": "3.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "@microsoft/signalr@latest",
+      "destination": "wwwroot/lib/signalr"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/lib/select2/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "toastr@2.1.4",
+      "destination": "wwwroot/lib/toastr/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "sweetalert2@11.26.25",
+      "destination": "wwwroot/lib/sweetalert2/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery.blockUI@2.70",
+      "destination": "wwwroot/lib/jquery.blockUI/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jstree@3.3.12",
+      "destination": "wwwroot/lib/jstree/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jstree-bootstrap-theme@1.0.1",
+      "destination": "wwwroot/lib/jstree-bootstrap-theme/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "dompurify@3.0.5",
+      "destination": "wwwroot/lib/dompurify/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "datatables.net-dt@2.3.8",
+      "destination": "wwwroot/lib/datatables.net-dt/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "datatables.net-rowgroup-dt@1.6.0",
+      "destination": "wwwroot/lib/datatables.net-rowgroup-dt/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "datatables.net@2.3.8",
+      "destination": "wwwroot/lib/datatables.net/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "datatables.net-rowgroup@1.6.0",
+      "destination": "wwwroot/lib/datatables.net-rowgroup/"
+    }
+  ]
+}
