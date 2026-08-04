@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(dotnet build *)",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "PowerShell(git config *)",
+      "PowerShell(\\(Get-Command gh -ErrorAction SilentlyContinue\\).Source; if \\(Test-Path \"$env:USERPROFILE\\\\.ssh\"\\) { Get-ChildItem \"$env:USERPROFILE\\\\.ssh\" | Select-Object -ExpandProperty Name } else { \"no .ssh dir\" })",
+      "PowerShell(git *)",
+      "PowerShell(cmdkey *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin\\\\git-credential-manager.exe\" --version; echo \"--- git branch/upstream ---\"; git status -sb | Select-Object -First 1; git log origin/master..HEAD --oneline 2>$null | Measure-Object | Select-Object -ExpandProperty Count)",
+      "Read(//c/Users/calvi/.nuget/packages/refit/8.0.0/lib/**)",
+      "Read(//c/Users/calvi/.nuget/packages/refit/8.0.0/lib/net8.0/**)",
+      "Bash(dotnet add *)",
+      "Bash(dotnet test *)"
     ]
   }
 }

@@ -103,12 +103,14 @@ namespace MakanPergiWebApi.Services
 
         public async Task<ApiResponse> CuisineExcelUploadProcessAsync(List<UploadCuisineExcelData> uploadCuisineExcelDatas)
         {
-            List<UploadExcelResult> uploadExcelResult = uploadCuisineExcelDatas[0]?.ErrorList ?? new List<UploadExcelResult>();
-
             if (uploadCuisineExcelDatas is null || !uploadCuisineExcelDatas.Any())
             {
-                return new ApiResponse($"No cuisine(s) have been uploaded. Excel sheet rows are empty.", uploadExcelResult, StatusCodes.Status200OK);
+                return new ApiResponse($"No cuisine(s) have been uploaded. Excel sheet rows are empty.", 
+                                       new List<UploadExcelResult>(), 
+                                       StatusCodes.Status200OK);
             }
+
+            List<UploadExcelResult> uploadExcelResult = uploadCuisineExcelDatas[0]?.ErrorList ?? new List<UploadExcelResult>();
 
             int successCount = 0, recordProcessCount = 0;
             string webSocketActionName = $"_UploadCuisine_Progress";
