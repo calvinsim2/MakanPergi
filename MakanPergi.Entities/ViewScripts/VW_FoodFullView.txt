@@ -1,0 +1,41 @@
+CREATE OR ALTER VIEW [dbo].[VW_FoodFullView]
+AS
+SELECT
+    f.Id,
+    f.Name,
+    f.Image,
+    c.Name AS CuisineName,
+    categories.CategoryNames,
+    shops.ShopNames
+
+FROM dbo.Food f
+
+LEFT JOIN dbo.Cuisine c
+    ON f.CuisineId = c.Id
+
+OUTER APPLY
+(
+    SELECT STRING_AGG(fc.Name, ', ') AS CategoryNames
+    FROM
+    (
+        SELECT DISTINCT cat.Name
+        FROM dbo.FoodCategory fcat
+        INNER JOIN dbo.Category cat
+            ON fcat.CategoryId = cat.Id
+        WHERE fcat.FoodId = f.Id
+    ) fc
+) categories
+
+OUTER APPLY
+(
+    SELECT STRING_AGG(fs.Name, ', ') AS ShopNames
+    FROM
+    (
+        SELECT DISTINCT s.Name
+        FROM dbo.FoodFromShop fshop
+        INNER JOIN dbo.Shop s
+            ON fshop.ShopId = s.Id
+        WHERE fshop.FoodId = f.Id
+    ) fs
+) shops;
+GO
