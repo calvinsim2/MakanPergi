@@ -3,6 +3,7 @@ using MakanPergi.Models;
 using MakanPergi.Models.Modals;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Refit;
 using System.Net;
 
@@ -26,14 +27,37 @@ namespace MakanPergi.Common
                 Console.WriteLine($"apiResponseError: {apiResponse.Error.Content}");
                 if (apiResponse != null && apiResponse.Error?.Content != null)
                 {
-                    BadRequestModel? errorModel = JsonConvert.DeserializeObject<BadRequestModel>(apiResponse.Error.Content);
-                    if (errorModel != null && errorModel.responseException != null && 
-                        !string.IsNullOrEmpty(errorModel.responseException.exceptionMessage))
+                    try
                     {
-                        _customMessage = errorModel.responseException.exceptionMessage;
+                        BadRequestModel? errorModel = JsonConvert.DeserializeObject<BadRequestModel>(apiResponse.Error.Content);
+                        string? message = ExtractMessage(errorModel?.responseException?.exceptionMessage);
+                        if (!string.IsNullOrEmpty(message))
+                        {
+                            _customMessage = message;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Unexpected error shape - keep the default "Something went wrong."
                     }
                 }
             }
+        }
+
+        private static string? ExtractMessage(JToken? exceptionMessage)
+        {
+            if (exceptionMessage == null) return null;
+
+            // Our own ApiException: "exceptionMessage": "Simulated Failure!"
+            if (exceptionMessage.Type == JTokenType.String) return exceptionMessage.ToString();
+
+            // Model validation: "exceptionMessage": { "errors": { "Address": ["..."] } }
+            if (exceptionMessage["errors"] is JObject errors)
+            {
+                return string.Join(" ", errors.Properties().SelectMany(p => p.Value.Values<string>()));
+            }
+
+            return exceptionMessage["title"]?.ToString();
         }
 
         public ApiResponseActionResult(ApiResponse<ResultWrapper<T>> apiResponse, string customMessage)

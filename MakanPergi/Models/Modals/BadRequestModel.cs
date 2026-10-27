@@ -1,4 +1,6 @@
-﻿namespace MakanPergi.Models.Modals
+﻿using Newtonsoft.Json.Linq;
+
+namespace MakanPergi.Models.Modals
 {
     // using AutoWrapper at backend, it returns in this format
     // {
@@ -17,6 +19,8 @@
 
     public class ResponseException
     {
-        public string exceptionMessage { get; set; }
+        // string when we throw ApiException ourselves,
+        // object when [ApiController] model validation fails before the action runs
+        public JToken? exceptionMessage { get; set; }
     }
 }

@@ -1,6 +1,9 @@
-﻿using MakanPergi.Entities;
+﻿using Common;
+using MakanPergi.Entities;
+using MakanPergi.Entities.Base;
 using MakanPergi.Entities.Views;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace MakanPergi.Data
 {
@@ -14,6 +17,30 @@ namespace MakanPergi.Data
         public DbSet<Shop> Shop { get; set; }
         public DbSet<VW_FoodFullView> FoodFullView { get; set; }
         public DbContext Instance => this;
+
+        public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // Update modified date
+            foreach (EntityEntry? changedEntity in ChangeTracker.Entries())
+            {
+                if (changedEntity.Entity is BaseEntity baseEntity)
+                {
+                    switch (changedEntity.State)
+                    {
+                        case EntityState.Modified:
+                        case EntityState.Added:
+                        case EntityState.Deleted:
+                            Console.WriteLine(
+                                changedEntity.DebugView.LongView);
+
+                            break;
+                    }
+                }
+            }
+
+            var result = await base.SaveChangesAsync();
+            return result;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

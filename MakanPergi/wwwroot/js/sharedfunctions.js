@@ -17,6 +17,7 @@ sharedFunctions.text = sharedFunctions.text || {};
 
             case 404:
                 uiCommon.message.error(event.responseText ? event.responseText : "Entity not found.");
+                break;
 
             case 400:
                 uiCommon.message.error(event.responseText ? event.responseText : "Bad Request Error");

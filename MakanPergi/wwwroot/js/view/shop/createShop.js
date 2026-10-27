@@ -18,11 +18,17 @@
                 Name: {
                     required: true,
                     maxlength: 15
+                },
+                Address: {
+                    required: true,
                 }
             },
             messages: {
                 Name: {
                     required: "Please enter Shop Name."
+                },
+                Address: {
+                    required: "Address is required."
                 }
             },
 
@@ -68,7 +74,8 @@
                 uiCommon.notify.success("Shop created successfully!");
             },
             error: function (xhr) {
-                uiCommon.notify.error("Add Shop Failed");
+                uiCommon.notify.error("Add Shop Failed!");
+                console.error(xhr.responseText);
                 sharedFunctions.func.commonRejectFunction(xhr);
             },
             complete: function () {

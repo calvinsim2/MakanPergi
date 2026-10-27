@@ -18,11 +18,17 @@
                 Name: {
                     required: true,
                     maxlength: 15
+                },
+                Address: {
+                    required: true,
                 }
             },
             messages: {
                 Name: {
                     required: "Please enter Shop Name."
+                },
+                Address: {
+                    required: "Address is required."
                 }
             },
 
@@ -73,6 +79,7 @@
                 // Any time a server writes data in the body of an HTTP response—whether 
                 // it’s a 200 or a 400 / 500, jQuery will stash that raw string in xhr.responseText
                 sharedFunctions.func.commonRejectFunction(xhr);
+
             },
             complete: function () {
                 uiCommon.ui.unblock(_$modal);
