@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW [dbo].[VW_FoodFullView]
+CREATE OR ALTER VIEW [dbo].[FoodFullView]
 AS
 SELECT
     f.Id,
